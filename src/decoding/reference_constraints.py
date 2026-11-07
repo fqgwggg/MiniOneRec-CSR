@@ -65,4 +65,4 @@ def generated_suffix(input_ids, prompt_width):
 def formal_gate(contract):
     required = ['tokenizer_fingerprint', 'checkpoint_sha256', 'prompt_protocol', 'score_protocol_id', 'termination_protocol']
     if contract.get('real_tokenizer_verified') is not True or any(not contract.get(k) or contract[k] == 'pending' for k in required):
-        raise ValueError('Formal integration pending: real tokenizer/model contract is not verified')
+        raise ValueError('Tokenizer/model contract validation is required')

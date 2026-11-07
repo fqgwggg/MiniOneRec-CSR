@@ -16,8 +16,8 @@ def main():
  fig.suptitle('Available-target paired cohorts; different snapshots have different denominators');fig.tight_layout();fig.savefig(out/'catalog.png',dpi=160);plt.close(fig)
  a=json.loads((r/'generation_benchmark.json').read_text());b=json.loads((r/'rl_update_benchmark.json').read_text());c=json.loads((r/'rl_update_benchmark_reverse.json').read_text())
  groups=[
-  ('Constraint callback',[1000*a['instrumented_constraint_seconds'][n] for n in ['reference','static']],'Profiled time (ms)','Synchronized instrumentation'),
-  ('Full generation (beam50)',[a['hot_generation_seconds'][n] for n in ['reference','static']],'Generation time (s)','Recorded aggregate; uninstrumented'),
+  ('Constraint callback',[1000*a['instrumented_constraint_seconds'][n] for n in ['reference','static']],'Profiled time (ms)','GPU-synchronized module timing'),
+  ('Full generation (beam50)',[a['hot_generation_seconds'][n] for n in ['reference','static']],'Generation time (s)','Complete-generation timing'),
   ('Full RL update',[b['timing'][n]['seconds_per_update_mean'] for n in ['reference','static']],'Mean time per update (s)','10 measured updates after warmup')]
  fig,axes=plt.subplots(1,3,figsize=(12.8,4.4))
  for ax,(title,values,ylabel,scope) in zip(axes,groups):

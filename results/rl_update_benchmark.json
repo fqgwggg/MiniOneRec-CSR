@@ -36,14 +36,10 @@
     }
   },
   "equivalence": {
-    "rank0_sampling_rewards_advantages": true,
-    "rank0_final_policy": true,
-    "rank1_sampling_rewards_advantages": true,
-    "rank1_final_policy": true
+    "sampling_rewards_advantages_all_checked_processes": true,
+    "final_policy_all_checked_processes": true
   },
-  "protected_unchanged": true,
   "speedup": 1.0185099432764686,
   "reduction_fraction": 0.018173551862364246,
-  "extrapolated_1650_update_seconds_saved": 249.98885801891387,
-  "limitation": "Late-training checkpoint1485, 3 warmups + 10 measured full updates. Excludes validation/save/load, includes identical evidence-hashing overhead. Short-run extrapolation, not full-run A/B."
+  "limitation": "Same trained model state; 3 warmups and 10 measured full updates. Excludes validation and checkpoint save/load; includes matching evidence-hash operations. Results describe the measured update workload."
 }

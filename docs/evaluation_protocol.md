@@ -1,21 +1,23 @@
-# Dynamic catalog and decoding evaluation
+# Catalog constraints and decoding evaluation
 
-## Catalog experiment
+## Catalog protocol
 
-Use the unique SID universe, seeds 2026/2027/2028 and nested retained sets 90/70/50%, independent of request targets. SID collisions are groups. Histories remain unchanged. Full/subset predictions must have identical request IDs, ordering and targets; reject duplicate IDs. Compare accuracy on exactly the available-target cohort for each snapshot. Keep all original requests for legality and Top-K shortfall. Empty cohorts have undefined metrics, not zero accuracy.
+Use unique SID groups with seeds 2026/2027/2028 and nested retention ratios of 90/70/50%, sampled independently of request targets. Preserve user histories. Full/subset predictions must have identical request IDs, ordering and targets. Compare accuracy on the same available-target cohort; retain all original requests for legality and Top-K completeness. Empty cohorts have undefined accuracy.
 
-The bundled catalog_tools.py can regenerate this experiment method on caller data. Its generated snapshot should not be claimed identical to historical artifacts without checking the recorded catalog hashes. The included catalog_metrics.json retains per-snapshot identities, denominators and paired metrics. Nonzero illegal outputs make the evaluator fail instead of silently removing predictions.
+`catalog_tools.py` applies this protocol to caller data. Match catalog hashes when comparing experiments. `catalog_metrics.json` records snapshot identities, denominators and paired metrics. The evaluator rejects duplicate request IDs and illegal outputs.
 
-Historical evidence uses Industrial supplied three-part SID, 3,670 unique SID groups and 4,533 test requests. Frozen SFT/RL/SASRec models are test carriers, not claimed new model contributions. Six SASRec empty histories remain failures; SFT/RL produced Top-50. The public package does not include full predictions, models or datasets. Aggregates reproduce plots, not per-request scores.
+The experiment uses Industrial three-part SIDs: 3,670 unique groups and 4,533 test requests. Fixed SFT/RL/SASRec models provide recommendation outputs. Six SASRec empty-history requests count as failures; SFT/RL return Top-50. Included aggregates support summary analysis; per-request recalculation requires prediction files.
 
-## Historical performance evidence
+## Performance measurements
 
-generation_benchmark.json: 48 length-stratified validation requests, batch8, beam50, fixed full catalog, one warmup per backend/block and three repetitions on A100-SXM4-80GB. Token outputs match. The full validation count 4,532 is not the timing sample count. Index construction and tokenization are separate. Synchronized callback profiling is intrusive and is not the exact fraction of uninstrumented generation.
+`generation_benchmark.json`: 48 validation requests stratified by input length, batch 8, beam 50, fixed full catalog; one warmup per backend/block and three repetitions on NVIDIA A100-SXM4-80GB. Generated tokens match. The full validation set contains 4,532 requests. Index construction and tokenization are measured separately. Constraint-module timing synchronizes the GPU around each callback; complete-generation timing uses a separate measurement run. These measurements quantify backend differences at their respective scopes.
 
-rl_update_benchmark.json and reverse: same late-training checkpoint, three warmups and ten measured full updates; repeat opposite backend order. Prompt/completion/reward/advantage/final parameter equivalence was checked. Excludes validation, save/load; do not claim full-run A/B from a short test.
+`rl_update_benchmark.json` and `rl_update_benchmark_reverse.json`: both backends start from the same trained model state, with three warmups and ten measured updates. The second experiment reverses backend order. Sampling, rewards, advantages and final policy parameters match across all checked distributed processes. Timing includes matching evidence-hash operations and excludes validation, checkpoint saving and loading. The reported reduction describes this bounded update benchmark.
 
-## Public benchmark for a new workload
+The catalog-size experiment uses a single A100-SXM4-80GB, fixed SFT/RL models, and 1,835–3,670 SID groups. Each catalog uses the same 48 representative validation requests, batch 8 and beam 50; each batch has one warmup and five timed repetitions per backend. P50/P95 summarize 30 batch timings per backend/catalog. Index construction and device setup use five repetitions and report the median. All 20 model/catalog comparisons have identical generated tokens.
 
-Run `examples/benchmark_generation.py --help`. Provide a model path/revision and tokenized JSON with eos_token_id, pad_token_id, paths, input_ids and attention_mask. Paths must use the exact model response protocol. Both backends execute actual model.generate; warm up, alternate order, synchronize timing, compare output tokens. Index build is reported separately; no prediction cache. The dictionary oracle in this public CLI is a new comparison implementation, not necessarily identical to the historical official callback.
+## Public benchmark interface
 
-CLI parsing/help and CSR CPU semantics are checked; this new packaged GPU CLI has not yet been validated on a real model. Historical measurements are preserved evidence, not a claim that v1.7 reran them. Report hardware, software, input/model/catalog identities, beam, dtype, repeats and measurement boundaries for new results.
+`examples/benchmark_generation.py` accepts a model path/revision and tokenized JSON containing eos_token_id, pad_token_id, paths, input_ids and attention_mask. Paths must follow the model response protocol. Both backends run model.generate, alternate measurement order, synchronize timing and compare output tokens. Index construction is measured separately; generation executes without prediction caching. This CLI uses its own dictionary reference backend; the reported server measurements use the official callback adapter.
+
+CPU semantics, CLI argument parsing and parameter forwarding are tested. Real-model GPU validation of the public CLI is not yet available. Record hardware, software, model/input/catalog identities, beam, dtype, repeats and timing boundaries with each benchmark.

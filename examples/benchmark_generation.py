@@ -49,7 +49,7 @@ def main():
   'torch':torch.__version__,'device':str(device),'dtype':a.dtype,'beams':a.beams,'requests':len(x),
   'seconds':times,'index_build_seconds':builds,'median_seconds':med,'tokens_equal':True,
   'speedup':med['reference']/med['csr'],'reduction':1-med['csr']/med['reference'],
-  'scope':'new caller-supplied workload, generation only; excludes build/load/tokenization; not historical benchmark reproduction'}
+  'scope':'caller-supplied workload; complete generation timing excludes index construction, model loading and tokenization'}
  a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(report,indent=2))
  print(json.dumps(report,indent=2))
 if __name__=='__main__':main()
