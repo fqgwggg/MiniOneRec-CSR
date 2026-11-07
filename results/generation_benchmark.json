@@ -1,0 +1,40 @@
+{
+  "status": "completed",
+  "requests": 48,
+  "full_validation_denominator": 4532,
+  "beam": 50,
+  "batch_size": 8,
+  "warmup_per_backend_per_block": 1,
+  "repeats": 3,
+  "exact_generated_tokens_equal": true,
+  "reference_matches_full_predictions": true,
+  "hot_generation_seconds": {
+    "reference": 3.3204578699951526,
+    "static": 2.490008946013404
+  },
+  "speedup": 1.3335124258534603,
+  "reduction_fraction": 0.25010072601311484,
+  "instrumented_constraint_seconds": {
+    "reference": 0.9336771280068206,
+    "static": 0.10709478598437272
+  },
+  "index_build_seconds": {
+    "reference": [
+      0.020203066000249237,
+      0.13178139200317673,
+      0.018667411000933498
+    ],
+    "static": [
+      0.044806332007283345,
+      0.04296905899536796,
+      0.043180822001886554
+    ]
+  },
+  "shared_tokenization_seconds": 0.19054339799913578,
+  "model_sha256": "396cdf8f2c6d4c3232ac0d7281b55a68d67e85ba0f6805a163f7e3b2571f1c4a",
+  "valid_sha256": "12bbb02bced0bd754a8b4e0f9ca4086416e30d12b0b73a2c95e7b195dd67385a",
+  "info_sha256": "bdc51fd9636e361db095c84de4e2650b3dd9606812c92e7a01f3b77c5c1a84f7",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "torch_version": "2.8.0+cu126",
+  "limitations": "48 requests stratified by input length, fixed full catalog; not full-catalog-size scaling. Synchronized callback profiling is intrusive and separate from uninstrumented generation timing. No prediction cache used for measured generation."
+}

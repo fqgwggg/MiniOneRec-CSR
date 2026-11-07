@@ -1,0 +1,49 @@
+{
+  "timing": {
+    "reference": {
+      "seconds_per_update_median": 8.029070957498334,
+      "seconds_per_update_mean": 8.336069841499556,
+      "measured_seconds": [
+        7.278473172002123,
+        7.8769306739995955,
+        8.712585304005188,
+        7.363845218991628,
+        7.852409291997901,
+        10.20634819699626,
+        6.185639404997346,
+        8.807012040997506,
+        8.181211240997072,
+        10.896243870010949
+      ],
+      "evidence_hash_seconds_total": 0.057214481857954524
+    },
+    "static": {
+      "seconds_per_update_median": 7.891603504998784,
+      "seconds_per_update_mean": 8.19440931349818,
+      "measured_seconds": [
+        7.3073164359957445,
+        7.700455580998096,
+        8.50964957899123,
+        7.188905397997587,
+        7.699656173004769,
+        10.038472781001474,
+        5.96646574899205,
+        8.577086195000447,
+        8.082751428999472,
+        10.873333814000944
+      ],
+      "evidence_hash_seconds_total": 0.057785592987784185
+    }
+  },
+  "equivalence": {
+    "rank0_sampling_rewards_advantages": true,
+    "rank0_final_policy": true,
+    "rank1_sampling_rewards_advantages": true,
+    "rank1_final_policy": true
+  },
+  "protected_unchanged": true,
+  "speedup": 1.0172874605821833,
+  "reduction_fraction": 0.01699368295790249,
+  "extrapolated_1650_update_seconds_saved": 233.73987120227017,
+  "limitation": "Late-training checkpoint1485, 3 warmups + 10 measured full updates. Excludes validation/save/load, includes identical evidence-hashing overhead. Short-run extrapolation, not full-run A/B."
+}

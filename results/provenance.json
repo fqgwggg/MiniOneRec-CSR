@@ -1,0 +1,18 @@
+{
+  "catalog_metrics.json": {
+    "sha256": "a80c92f8067b34c8f6472dcd1db0d750fdcfc0d625b2c8e89d5cac46f62a1700",
+    "scope": "historical contribution evidence, not remeasured in this release"
+  },
+  "generation_benchmark.json": {
+    "sha256": "edfabb796a3aae87adfb1a75bcd11373225ad5ef9a6bbf6ec859a8dcc710ee1c",
+    "scope": "historical contribution evidence, not remeasured in this release"
+  },
+  "rl_update_benchmark.json": {
+    "sha256": "4fa0ba17e2626f6a24fcd9ab7eb2a6eeaee88ec5efb3e795d59c10f327bbcead",
+    "scope": "historical contribution evidence, not remeasured in this release"
+  },
+  "rl_update_benchmark_reverse.json": {
+    "sha256": "a471ae98d05deed2f931457b8af65a3ba5fbdd2bb2164c3eb5c517a92f0f9ae6",
+    "scope": "historical contribution evidence, not remeasured in this release"
+  }
+}

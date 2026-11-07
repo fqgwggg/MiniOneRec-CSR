@@ -1,0 +1,5 @@
+numpy
+torch
+# For actual model generation, use the recorded compatible version below.
+transformers==4.57.1
+matplotlib==3.10.7
